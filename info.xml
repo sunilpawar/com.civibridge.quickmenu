@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<extension key="com.civibridge.quickmenu" type="module">
+  <file>quickmenu</file>
+  <name>Quick Menu</name>
+  <description>Search CiviCRM Menu</description>
+  <license>GNU Affero General Public License, version 3</license>
+  <maintainer>
+    <author>Sunil Pawar</author>
+    <email>esunil.pawar@gmail.com</email>
+  </maintainer>
+  <urls>
+    <url desc="Main Extension Page">https://github.com/sunilpawar/com.civibridge.quickmenu</url>
+    <url desc="Documentation">https://github.com/sunilpawar/com.civibridge.quickmenu/blob/master/README.md</url>
+    <url desc="Support">https://github.com/sunilpawar/com.civibridge.quickmenu/issues?state=open</url>
+  </urls>
+  <releaseDate>2019-05-09</releaseDate>
+  <version>1.0</version>
+  <develStage>alpha</develStage>
+  <compatibility>
+    <ver>4.7</ver>
+    <ver>5.7</ver>
+  </compatibility>
+  <comments>Search CiviCRM Menu using through search box</comments>
+  <civix>
+    <namespace>CRM/Quickmenu</namespace>
+  </civix>
+</extension>

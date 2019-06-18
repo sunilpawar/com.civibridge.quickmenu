@@ -1,0 +1,51 @@
+body:after {
+    content: "";
+    display: none;
+    position: fixed; /* could also be absolute */
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+    background: rgba(0,0,0,0.6);
+}
+
+.overlay-quick-menu {
+    display: none;
+    padding: 10px;
+    width: 300px;
+    height: 200px;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -150px;
+    background-color: #fff;
+    border-radius: 5px;
+    /* text-align: center; */
+    z-index: 11; /* 1px higher than the overlay layer */
+    border: solid 4px;
+    border-radius: 12px;
+    background: floralwhite;
+}
+
+body.popup-open:after, .popup-open {
+    display: block;
+    overflow: hidden; /*prevents bg content from scrolling when popup shown*/
+
+}
+div#form-quickmenu [type="reset"] {
+    position: absolute;
+    border: none;
+    display: none;
+    width: 16px;
+    height: 22px;
+    /* border-radius: 20px;*/
+    top: 21px;
+    bottom: 2px;
+    right: 7px;
+    background-color: #ddd;
+    padding: 0px;
+    margin: 0px;
+}
+
