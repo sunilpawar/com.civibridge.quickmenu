@@ -169,10 +169,10 @@ function quickmenu_civicrm_buildForm(&$form) {
 function _quickmenu_civix_civicrm_js($config) {
   // add js only for normal civicrm url and skip for cron job.
   // Joomla throw error for isUserLoggedIn function because we calling isUserLoggedIn function though config hook that time JFactory class is not initialised.
-  if (isset($_SERVER['SCRIPT_URL']) && preg_match('#civicrm/(extern|bin)#', $_SERVER['SCRIPT_URL']) ) {
+  if (isset($_SERVER['SCRIPT_URL']) && preg_match('#civicrm/(extern|bin)#', $_SERVER['SCRIPT_URL'])) {
     return;
   }
-  if (CRM_Utils_System::isUserLoggedIn() ) {
+  if (CRM_Core_Permission::check('allow quick menu') && CRM_Utils_System::isUserLoggedIn()) {
     if (array_key_exists('snippet', $_GET)) {
       return;
     }
@@ -180,7 +180,20 @@ function _quickmenu_civix_civicrm_js($config) {
       cj( document ).ready(function() {
         cj('ul#civicrm-menu').append('<li id=\"crm-qukckmenu\" class=\"menumain\" tabindex=\"20\"><div id=\"form-quickmenu\"><div style=\"position:relative;\"><input style=\"width:6em;\" type=\"text\" name=\"quickmenu\" placeholder=\"Quick Menu Search\" id=\"quickmenu\" class=\"form-text\" maxlength=\"64\"><input id=\"quickmenu-reset\"  class=\"quickmenu-reset\" type=\"reset\" value=\"X\" /></div></div></li>');
       });
-    ");
+    ")
+    ;
   }
 }
 
+/**
+ * Implements hook_civicrm_permission()
+ *
+ * @param array $permissions
+ *   Array of permissions defined on extensions
+ */
+function quickmenu_civicrm_permission(&$permissions) {
+  $permissions['allow quick menu'] = array(
+    'CiviCRM Quick Menu: allow quick menu',
+    ts('Allows a user to quickly search menu from navigation bar.')
+  );
+}
