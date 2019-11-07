@@ -9,5 +9,5 @@ Navigate to **Administer -> System Settings -> Extensions** and select this exte
 
 ## Usage
 
-Once installed the extension will show search box in Navigation menu (right side)
+Once installed, you need to grant permission 'allow quick menu' to roles, the extension will show search box in Navigation menu (right side)
 - Users can type the menu name and list of matching menu will appear in popup box.
