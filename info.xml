@@ -17,7 +17,6 @@
   <version>1.0</version>
   <develStage>alpha</develStage>
   <compatibility>
-    <ver>4.7</ver>
     <ver>5.7</ver>
   </compatibility>
   <comments>Search CiviCRM Menu using through search box</comments>
