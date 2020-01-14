@@ -13,7 +13,7 @@ body:after {
 .overlay-quick-menu {
     display: none;
     padding: 10px;
-    width: 300px;
+    width: 400px;
     height: 200px;
     position: fixed;
     top: 30%;

@@ -23,6 +23,7 @@ cj(document).ready(function() {
     cj( ".overlay-quick-menu" ).removeClass("popup-open");
     cj('#civicrm-menu-custom').hide();
     cj('#overlay-quick-menu').hide();
+    cj("#quickmenu").val('');
   };
   // Get all li with anchor tag
   var labels = cj('#civicrm-menu-custom li a');
