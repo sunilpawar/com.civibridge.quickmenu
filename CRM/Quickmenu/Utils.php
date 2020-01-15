@@ -13,21 +13,32 @@ class CRM_Quickmenu_Utils {
       return;
     }
     $config = CRM_Core_Config::singleton();
+    CRM_Core_Resources::singleton()->addScript(file_get_contents(dirname(dirname(dirname(__FILE__))) . "/js/quickmenu.js"));
+    CRM_Core_Resources::singleton()->addStyleFile('com.civibridge.quickmenu', 'css/quickmenu.css');
+    self::$_resource_loaded = TRUE;
+  }
+
+  public static function navMenu() {
+    if (!CRM_Core_Permission::check('allow quick menu') || self::is_public_page() || !CRM_Core_Session::getLoggedInContactID()) {
+      CRM_Utils_System::civiExit();
+    }
+
     $menuList = self::buildNavigation();
     $menuList = str_replace('class="menu-separator"', '', $menuList);
     $menuList = substr($menuList, 5);
     $html = '<div class="overlay-quick-menu" id="overlay-quick-menu" style="display:none;overflow:scroll;height:300px !important;"><div id="quick-search-title" style="width:16px;float: right;margin-right: 20px;"><input class="quickmenu-reset" type="reset" value="X" style="display: inline-block;position:fixed;"></div><ul id="civicrm-menu-custom" style="display:none;margin:0px;">' . $menuList . '</ul></div>';
 
-    CRM_Core_Resources::singleton()->addScript("
-       cj( document ).ready(function() {
-       cj( 'body' ).append( '{$html}' );
-       });
-    ")
-    ;
+    $output = [
+      'quickmenu' => $html,
+    ];
+    // Encourage browsers to cache for a long time - 1 year
+    $ttl = 60 * 60 * 24 * 364;
+    CRM_Utils_System::setHttpHeader('Expires', gmdate('D, d M Y H:i:s \G\M\T', time() + $ttl));
+    CRM_Utils_System::setHttpHeader('Cache-Control', "max-age=$ttl, public");
+    CRM_Utils_System::setHttpHeader('Content-Type', 'application/json');
+    print (json_encode($output));
+    CRM_Utils_System::civiExit();
 
-    CRM_Core_Resources::singleton()->addScript(file_get_contents(dirname(dirname(dirname(__FILE__))) . "/js/quickmenu.js"));
-    CRM_Core_Resources::singleton()->addStyleFile('com.civibridge.quickmenu', 'css/quickmenu.css');
-    self::$_resource_loaded = TRUE;
   }
 
   static function is_public_page() {
@@ -102,6 +113,7 @@ class CRM_Quickmenu_Utils {
     }
     return $navigationString;
   }
+
   public static function getMenuName(&$value, &$skipMenuItems) {
     // we need to localise the menu labels (CRM-5456) and don’t
     // want to use ts() as it would throw the ts-extractor off
@@ -209,4 +221,5 @@ class CRM_Quickmenu_Utils {
 
     return $name;
   }
+
 }
